@@ -36,25 +36,28 @@
       const managedVideos = new Set();
       const bgmBlockers = new Set();
       const SURPRISE_MODAL_BLOCKER = "surprise-modal";
+      const SURPRISE_VIDEO_SOURCES = ["surprise_mobile.mp4", "surprise_fast.mp4", "surprise_web.mp4"];
 
       const blessing = "今天的你要被快乐包围，被奶油云朵托住，被好运亲一口。愿你眼里一直有星星，心里一直有糖，所有愿望都闪闪发光！🎂✨💖🥳";
       const momentPhotos = [
-        { type: "image", src: "moment_a.jpg", caption: "第一次被投喂，感动了。" },
-        { type: "image", src: "moment_b.jpg", caption: "笑死我了在图书馆雷霆大睡。" },
-        { type: "video", src: "moment_c.mp4", caption: "阴没边了，严肃收藏。" }
+        { type: "image", src: "moment_a.webp", fallback: "moment_a.jpg", caption: "第一次被投喂，感动了。" },
+        { type: "image", src: "moment_b.webp", fallback: "moment_b.jpg", caption: "笑死我了在图书馆雷霆大睡。" },
+        { type: "video", src: "moment_c_fast.mp4", fallback: "moment_c.mp4", caption: "阴没边了，严肃收藏。" }
       ];
       const progressPhotos = {
-        before: "before.jpg",
-        after: "after.jpg"
+        before: "before.webp",
+        beforeFallback: "before.jpg",
+        after: "after.webp",
+        afterFallback: "after.jpg"
       };
       const flagPhotos = [
-        { src: "flag_a.jpg", caption: "flag 01" },
-        { src: "flag_b.jpg", caption: "flag 02" }
+        { src: "flag_a.webp", fallback: "flag_a.jpg", caption: "flag 01" },
+        { src: "flag_b.webp", fallback: "flag_b.jpg", caption: "flag 02" }
       ];
       const studyPhotos = [
-        { src: "study_1.jpg", caption: "学霸笔记 01" },
-        { src: "study_2.jpg", caption: "学霸笔记 02" },
-        { src: "study_3.jpg", caption: "学霸笔记 03" }
+        { src: "study_1.webp", fallback: "study_1.jpg", caption: "学霸笔记 01" },
+        { src: "study_2.webp", fallback: "study_2.jpg", caption: "学霸笔记 02" },
+        { src: "study_3.webp", fallback: "study_3.jpg", caption: "学霸笔记 03" }
       ];
       const fortunes = [
         {
@@ -200,9 +203,11 @@
 
       registerManagedVideo(birthdayVideo);
       birthdayVideo.addEventListener("error", () => {
-        if (birthdayVideo.dataset.fallbackLoaded === "true") return;
-        birthdayVideo.dataset.fallbackLoaded = "true";
-        birthdayVideo.src = "surprise.mp4";
+        if (!videoModal.classList.contains("is-visible")) return;
+        const nextIndex = Number(birthdayVideo.dataset.sourceIndex || 0) + 1;
+        if (nextIndex >= SURPRISE_VIDEO_SOURCES.length) return;
+        birthdayVideo.dataset.sourceIndex = String(nextIndex);
+        birthdayVideo.src = SURPRISE_VIDEO_SOURCES[nextIndex];
         birthdayVideo.load();
       });
 
@@ -508,6 +513,12 @@
             media.controls = true;
             media.preload = "metadata";
             media.playsInline = true;
+            media.addEventListener("error", () => {
+              if (!photo.fallback || media.dataset.fallbackLoaded === "true") return;
+              media.dataset.fallbackLoaded = "true";
+              media.src = photo.fallback;
+              media.load();
+            });
             registerManagedVideo(media);
           } else {
             media = document.createElement("img");
@@ -516,7 +527,7 @@
             media.loading = "lazy";
             media.onerror = () => {
               media.onerror = null;
-              media.src = fallback;
+              media.src = photo.fallback || fallback;
             };
           }
           stage.prepend(media);
@@ -574,7 +585,7 @@
           image.loading = "lazy";
           image.onerror = () => {
             image.onerror = null;
-            image.src = makePlaceholder(`FLAG ${String(safeIndex + 1).padStart(2, "0")}`, ["#fff084", "#ff8abc", "#8cf0d2", "#78c8ff"][safeIndex], ["#ff8abc", "#8cf0d2", "#b995ff", "#ffc07a"][safeIndex]);
+            image.src = photo.fallback || makePlaceholder(`FLAG ${String(safeIndex + 1).padStart(2, "0")}`, ["#fff084", "#ff8abc", "#8cf0d2", "#78c8ff"][safeIndex], ["#ff8abc", "#8cf0d2", "#b995ff", "#ffc07a"][safeIndex]);
           };
           stage.prepend(image);
           stage.scrollTop = 0;
@@ -632,7 +643,7 @@
           image.loading = "lazy";
           image.onerror = () => {
             image.onerror = null;
-            image.src = makePlaceholder(`STUDY ${String(safeIndex + 1).padStart(2, "0")}`, ["#8cf0d2", "#78c8ff", "#fff084"][safeIndex], ["#78c8ff", "#b995ff", "#ff8abc"][safeIndex]);
+            image.src = photo.fallback || makePlaceholder(`STUDY ${String(safeIndex + 1).padStart(2, "0")}`, ["#8cf0d2", "#78c8ff", "#fff084"][safeIndex], ["#78c8ff", "#b995ff", "#ff8abc"][safeIndex]);
           };
           stage.prepend(image);
           stage.scrollTop = 0;
@@ -681,13 +692,13 @@
         beforeImg.src = progressPhotos.before;
         beforeImg.alt = "萌新期 Before";
         beforeImg.addEventListener("error", () => {
-          beforeImg.src = makePlaceholder("Before", "#d8b58a", "#8cf1ca");
+          beforeImg.src = progressPhotos.beforeFallback || makePlaceholder("Before", "#d8b58a", "#8cf1ca");
         }, { once: true });
 
         afterImg.src = progressPhotos.after;
         afterImg.alt = "大魔王期 After";
         afterImg.addEventListener("error", () => {
-          afterImg.src = makePlaceholder("After", "#ff8abc", "#78c8ff");
+          afterImg.src = progressPhotos.afterFallback || makePlaceholder("After", "#ff8abc", "#78c8ff");
         }, { once: true });
 
         beforeLabel.textContent = "Before";
@@ -770,6 +781,10 @@
         closeFortune();
         videoModal.classList.add("is-visible");
         videoModal.setAttribute("aria-hidden", "false");
+        if (!birthdayVideo.getAttribute("src")) {
+          birthdayVideo.dataset.sourceIndex = "0";
+          birthdayVideo.src = SURPRISE_VIDEO_SOURCES[0];
+        }
         birthdayVideo.load();
         restartSheetAnimation(videoSheet);
         celebrateFullScreen(1);
@@ -780,8 +795,7 @@
         birthdayVideo.pause();
         birthdayVideo.removeAttribute("src");
         birthdayVideo.load();
-        birthdayVideo.dataset.fallbackLoaded = "false";
-        birthdayVideo.src = "surprise_web.mp4";
+        birthdayVideo.dataset.sourceIndex = "0";
         releaseBgm(SURPRISE_MODAL_BLOCKER);
         videoModal.classList.remove("is-visible");
         videoModal.setAttribute("aria-hidden", "true");
