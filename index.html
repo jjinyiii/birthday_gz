@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>生日盲盒</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app" id="app">
+    <section class="opening" id="opening" aria-label="生日盲盒开场">
+      <div class="opening-decor" aria-hidden="true">
+        <span class="decor-item decor-cake-left">
+          <svg viewBox="0 0 120 120">
+            <path d="M21 74h78v22c0 8-7 15-15 15H36c-8 0-15-7-15-15V74Z" fill="#ff8fc8"/>
+            <path d="M28 58h64c6 0 11 5 11 11v9H17v-9c0-6 5-11 11-11Z" fill="#fff6b0"/>
+            <path d="M24 76c10 9 17-7 27 1s17-7 28 0s15-6 24-1v10H17V76Z" fill="#ffffff" opacity=".9"/>
+            <path d="M35 58V43M60 58V38M85 58V45" stroke="#7b55c7" stroke-width="6" stroke-linecap="round"/>
+            <path class="candle-flame" d="M60 24c8 8 8 15 0 19c-8-4-8-11 0-19Z" fill="#ffd95e"/>
+            <path class="candle-flame" d="M35 31c6 7 6 12 0 16c-7-4-7-9 0-16Z" fill="#ffb347"/>
+            <path class="candle-flame" d="M85 33c6 7 6 12 0 16c-7-4-7-9 0-16Z" fill="#ffb347"/>
+            <circle cx="42" cy="91" r="4" fill="#ffe45e"/>
+            <circle cx="62" cy="90" r="4" fill="#8bf0d2"/>
+            <circle cx="82" cy="91" r="4" fill="#86c7ff"/>
+          </svg>
+        </span>
+        <span class="decor-item decor-cake-right">
+          <svg viewBox="0 0 120 120">
+            <path d="M24 69h72v24c0 8-6 14-14 14H38c-8 0-14-6-14-14V69Z" fill="#8bf0d2"/>
+            <path d="M30 54h60c6 0 10 4 10 10v8H20v-8c0-6 4-10 10-10Z" fill="#ffb2d8"/>
+            <path d="M22 70c9 8 17-6 26 0s18-6 27 0s16-5 25 0v9H20v-9Z" fill="#fff" opacity=".86"/>
+            <path d="M48 54V38M72 54V38" stroke="#ff7bbb" stroke-width="6" stroke-linecap="round"/>
+            <path class="candle-flame" d="M48 25c7 7 7 13 0 17c-7-4-7-10 0-17Z" fill="#ffe45e"/>
+            <path class="candle-flame" d="M72 25c7 7 7 13 0 17c-7-4-7-10 0-17Z" fill="#ffe45e"/>
+          </svg>
+        </span>
+        <span class="decor-item decor-candle-left">
+          <svg viewBox="0 0 70 110">
+            <path class="candle-flame" d="M35 9c13 13 13 25 0 32C22 34 22 22 35 9Z" fill="#ffd95e"/>
+            <path d="M23 39h24v56c0 7-5 12-12 12s-12-5-12-12V39Z" fill="#fff8b8"/>
+            <path d="M23 54h24M23 69h24M23 84h24" stroke="#ff8fc8" stroke-width="5"/>
+          </svg>
+        </span>
+        <span class="decor-item decor-candle-right">
+          <svg viewBox="0 0 70 110">
+            <path class="candle-flame" d="M35 8c13 14 13 25 0 33C22 33 22 22 35 8Z" fill="#ffb347"/>
+            <path d="M22 39h26v56c0 7-6 12-13 12S22 102 22 95V39Z" fill="#cda1ff"/>
+            <path d="M22 54h26M22 69h26M22 84h26" stroke="#fff8b8" stroke-width="5"/>
+          </svg>
+        </span>
+      </div>
+      <div class="opening-inner">
+        <p class="secret-copy">嘘... 里面藏着赋能姐的专属惊喜。</p>
+
+        <button class="gift-button" id="giftButton" type="button" aria-label="打开生日盲盒">
+          <svg viewBox="0 0 220 220" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="giftPink" x1="28" x2="178" y1="54" y2="186" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#ffa4d2"/>
+                <stop offset=".45" stop-color="#ff62ad"/>
+                <stop offset="1" stop-color="#d83f96"/>
+              </linearGradient>
+              <linearGradient id="giftSide" x1="60" x2="170" y1="110" y2="196" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#ff7fbb"/>
+                <stop offset=".68" stop-color="#e64e9c"/>
+                <stop offset="1" stop-color="#bd347f"/>
+              </linearGradient>
+              <linearGradient id="giftRibbon" x1="95" x2="132" y1="42" y2="196" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#fff8b8"/>
+                <stop offset=".55" stop-color="#ffe45e"/>
+                <stop offset="1" stop-color="#ffb62e"/>
+              </linearGradient>
+              <radialGradient id="giftGloss" cx=".32" cy=".18" r=".72">
+                <stop offset="0" stop-color="#fff" stop-opacity=".82"/>
+                <stop offset=".35" stop-color="#fff" stop-opacity=".28"/>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="softGiftShadow" x="-20%" y="-20%" width="140%" height="150%">
+                <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#743c91" flood-opacity=".28"/>
+              </filter>
+            </defs>
+            <g filter="url(#softGiftShadow)">
+              <g class="gift-lid">
+                <path d="M42 82c0-10 8-18 18-18h100c10 0 18 8 18 18v20H42V82Z" fill="url(#giftPink)"/>
+                <path d="M56 70h108c7 0 12 5 12 12v6H44v-4c0-8 5-14 12-14Z" fill="url(#giftGloss)" opacity=".9"/>
+                <path d="M100 64h22v38h-22z" fill="url(#giftRibbon)"/>
+                <path d="M112 64c-10-17-24-29-38-27-14 2-22 14-18 25 5 17 30 13 56 2Z" fill="#ffdd68"/>
+                <path d="M111 64c12-17 28-29 41-26 14 3 20 16 15 27-8 16-32 11-56-1Z" fill="#ffef92"/>
+                <path d="M81 54c8-3 17 1 27 8-18 6-31 7-35 0-2-4 1-7 8-8Z" fill="#fff7c8" opacity=".56"/>
+                <path d="M143 54c-9-2-18 2-28 9 18 5 31 6 35-2 2-4-1-6-7-7Z" fill="#fff7c8" opacity=".6"/>
+              </g>
+              <g class="gift-box">
+                <path d="M52 102h116v72c0 12-10 22-22 22H74c-12 0-22-10-22-22v-72Z" fill="url(#giftSide)"/>
+                <path d="M98 102h24v94H98z" fill="url(#giftRibbon)"/>
+                <path d="M52 126h116v22H52z" fill="#ff7fbb" opacity=".48"/>
+                <path d="M64 112h82c7 0 12 5 12 12v2H54v-2c0-7 4-12 10-12Z" fill="url(#giftGloss)" opacity=".6"/>
+                <path d="M72 116c20 10 52 10 76 0" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".26"/>
+              </g>
+            </g>
+          </svg>
+        </button>
+
+        <p class="unlock-copy">点击解锁你的 19 岁生日盲盒 🎁</p>
+      </div>
+    </section>
+
+    <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+
+    <section class="party" id="party" aria-label="生日祝福">
+      <div class="bg-float" aria-hidden="true">
+        <span class="dot" style="--x:8%;--y:18%;--size:74px;--color:#fff084;--dx:22px;--dy:34px;--time:7.2s;--delay:-1s;"></span>
+        <span class="dot" style="--x:74%;--y:11%;--size:58px;--color:#ff8fc8;--dx:-24px;--dy:42px;--time:8.8s;--delay:-3s;"></span>
+        <span class="dot" style="--x:86%;--y:66%;--size:92px;--color:#8cf4d2;--dx:-20px;--dy:-38px;--time:9.5s;--delay:-1.8s;"></span>
+        <span class="dot" style="--x:5%;--y:70%;--size:46px;--color:#90cfff;--dx:28px;--dy:-30px;--time:7.8s;--delay:-2.6s;"></span>
+        <span class="dot" style="--x:48%;--y:5%;--size:34px;--color:#cfafff;--dx:18px;--dy:36px;--time:6.9s;--delay:-.6s;"></span>
+        <span class="dot" style="--x:58%;--y:88%;--size:50px;--color:#ffcf73;--dx:-22px;--dy:-34px;--time:8.1s;--delay:-4s;"></span>
+        <span class="wave" style="--x:10%;--y:38%;--w:116px;--color:#fff8bd;--rot:12deg;--dx:34px;--dy:-18px;--time:9.5s;--delay:-2s;"></span>
+        <span class="wave" style="--x:66%;--y:34%;--w:132px;--color:#f65da9;--rot:-16deg;--dx:-30px;--dy:20px;--time:8.2s;--delay:-1s;"></span>
+        <span class="wave" style="--x:20%;--y:86%;--w:118px;--color:#6ed5ff;--rot:-8deg;--dx:20px;--dy:-22px;--time:7.4s;--delay:-3.1s;"></span>
+      </div>
+
+      <article class="birthday-card" id="birthdayCard">
+        <div class="photo-frame">
+          <img alt="????" src="avatar.jpg">
+          <span class="shine"></span>
+        </div>
+
+        <h1 class="title" id="title">郭卓小公主，生日快乐！</h1>
+        <p class="message" id="message" aria-live="polite"></p>
+
+        <div class="draw-area">
+          <button class="draw-button" id="drawButton" type="button">点我抽个签</button>
+        </div>
+      </article>
+
+      <button class="feature-button" data-modal="moments" type="button" aria-label="瞬间"><span class="button-symbol">♡</span></button>
+      <button class="feature-button" data-modal="progress" type="button" aria-label="赋能姐进化史"><span class="button-symbol">↔</span></button>
+      <button class="feature-button" data-modal="surprise" type="button" aria-label="惊喜"><span class="button-symbol">▶</span></button>
+      <button class="feature-button" data-modal="flags" type="button" aria-label="flag就是用来打破的"><span class="button-symbol">!</span></button>
+      <button class="feature-button" data-modal="study" type="button" aria-label="学霸笔记"><span class="button-symbol">✎</span></button>
+    </section>
+
+    <section class="fortune-page" id="fortunePage" aria-label="生日签详情" aria-hidden="true">
+      <div class="fortune-backdrop" id="fortuneBackdrop"></div>
+      <article class="fortune-sheet" id="fortuneSheet" role="dialog" aria-modal="true" aria-labelledby="fortuneTitle">
+        <div class="fortune-aura" aria-hidden="true">
+          <span class="cream-cloud cloud-one"></span>
+          <span class="cream-cloud cloud-two"></span>
+          <span class="candy-orbit candy-one">✨</span>
+          <span class="candy-orbit candy-two">🎈</span>
+        </div>
+        <button class="fortune-close" id="fortuneClose" type="button" aria-label="关闭签文">×</button>
+        <header class="fortune-header">
+          <p class="fortune-kicker"><span class="candy-dot" aria-hidden="true">✦</span><span id="fortuneKicker">生日限定签</span></p>
+          <button class="fortune-mark" id="fortuneMark" type="button" aria-label="释放魔法能量">上上</button>
+          <h2 class="fortune-title" id="fortuneTitle">闪闪发光签</h2>
+        </header>
+        <p class="fortune-poem" id="fortunePoem"></p>
+        <div class="fortune-grid">
+          <div>
+            <span>今日关键词</span>
+            <strong id="fortuneKeyword"></strong>
+          </div>
+          <div>
+            <span>幸运小事</span>
+            <strong id="fortuneLucky"></strong>
+          </div>
+        </div>
+        <p class="fortune-detail" id="fortuneDetail"></p>
+        <div class="fortune-actions">
+          <button class="draw-again-button" id="drawAgainButton" type="button">再抽一签</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="media-modal" id="mediaModal" aria-label="媒体详情" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+      <article class="modal-sheet" id="mediaSheet" role="dialog" aria-modal="true" aria-labelledby="mediaTitle">
+        <button class="modal-close" type="button" data-close-modal aria-label="关闭详情">×</button>
+        <p class="modal-kicker" id="mediaKicker">生日回忆</p>
+        <h2 class="modal-title" id="mediaTitle">瞬间</h2>
+        <div class="modal-content" id="mediaContent"></div>
+      </article>
+    </section>
+
+    <section class="media-modal" id="videoModal" aria-label="生日视频" aria-hidden="true">
+      <div class="modal-backdrop" data-close-video></div>
+      <article class="modal-sheet" id="videoSheet" role="dialog" aria-modal="true" aria-labelledby="videoTitle">
+        <button class="modal-close" type="button" data-close-video aria-label="关闭视频">×</button>
+        <p class="modal-kicker">生日快乐视频</p>
+        <h2 class="modal-title" id="videoTitle">惊喜</h2>
+        <video class="surprise-video" id="birthdayVideo" src="surprise_web.mp4" preload="none" controls playsinline></video>
+        <p class="video-note">你就欣赏吧。</p>
+      </article>
+    </section>
+    <audio id="bgm" src="Sacred Play Secret Place.mp3" preload="auto" loop></audio>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
