@@ -37,6 +37,13 @@
       const bgmBlockers = new Set();
       const SURPRISE_MODAL_BLOCKER = "surprise-modal";
       const SURPRISE_VIDEO_SOURCES = ["surprise_mobile.mp4", "surprise_fast.mp4", "surprise_web.mp4"];
+      const featureMeta = {
+        moments: { label: "瞬间", symbol: "♡" },
+        flags: { label: "flag就是用来打破的", symbol: "!" },
+        progress: { label: "赋能姐进化史", symbol: "↔" },
+        study: { label: "学霸笔记", symbol: "✎" },
+        surprise: { label: "惊喜", symbol: "▶" }
+      };
 
       const blessing = "今天的你要被快乐包围，被奶油云朵托住，被好运亲一口。愿你眼里一直有星星，心里一直有糖，所有愿望都闪闪发光！🎂✨💖🥳";
       const momentPhotos = [
@@ -135,6 +142,26 @@
       let tickingParallax = false;
 
       title.textContent = `${princessName}小公主，生日快乐！`;
+
+      function normalizeFeatureButtons() {
+        featureButtons.forEach((button) => {
+          const meta = featureMeta[button.dataset.modal];
+          if (!meta) return;
+          button.dataset.label = meta.label;
+          button.dataset.symbol = meta.symbol;
+          button.setAttribute("aria-label", meta.label);
+
+          let symbol = button.querySelector(".button-symbol");
+          if (!symbol) {
+            symbol = document.createElement("span");
+            symbol.className = "button-symbol";
+            button.replaceChildren(symbol);
+          }
+          symbol.textContent = meta.symbol;
+        });
+      }
+
+      normalizeFeatureButtons();
 
       function createMediaCoordinator(audio) {
         let unlocked = false;

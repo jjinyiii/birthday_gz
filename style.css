@@ -625,7 +625,7 @@
     }
 
     .feature-button::after {
-      content: attr(aria-label);
+      content: attr(data-label);
       position: absolute;
       left: 50%;
       top: calc(100% + 10px);
@@ -649,6 +649,7 @@
 
     .feature-button[data-modal="moments"] {
       --feature-border: linear-gradient(135deg, #ff7fbb, #ffc07a);
+      --symbol-bg: linear-gradient(135deg, #ff7fbb, #ffc07a);
       --glow: rgba(255, 127, 187, .2);
       --button-size: 72px;
       --float-time: 3.35s;
@@ -659,6 +660,7 @@
 
     .feature-button[data-modal="progress"] {
       --feature-border: linear-gradient(135deg, #78c8ff, #b995ff);
+      --symbol-bg: linear-gradient(135deg, #78c8ff, #b995ff);
       --glow: rgba(120, 200, 255, .22);
       --button-size: 72px;
       --float-time: 3.65s;
@@ -672,6 +674,7 @@
     .feature-button[data-modal="surprise"] {
       --button-size: 78px;
       --feature-border: linear-gradient(135deg, #ff5aa9, #b995ff 54%, #6ed5ff);
+      --symbol-bg: linear-gradient(135deg, #ff5aa9, #b995ff 54%, #6ed5ff);
       --glow: rgba(185, 149, 255, .24);
       --float-time: 3.1s;
       --float-delay: -1.7s;
@@ -681,6 +684,7 @@
 
     .feature-button[data-modal="flags"] {
       --feature-border: linear-gradient(135deg, #fff084, #ff8abc 48%, #8cf0d2);
+      --symbol-bg: linear-gradient(135deg, #fff084, #ff8abc 48%, #8cf0d2);
       --glow: rgba(255, 240, 132, .24);
       --button-size: 72px;
       --float-time: 3.55s;
@@ -701,6 +705,7 @@
 
     .feature-button[data-modal="study"] {
       --feature-border: linear-gradient(135deg, #8cf0d2, #78c8ff 50%, #fff084);
+      --symbol-bg: linear-gradient(135deg, #8cf0d2, #78c8ff 50%, #fff084);
       --glow: rgba(120, 200, 255, .24);
       --button-size: 72px;
       --float-time: 3.8s;
@@ -722,7 +727,7 @@
       aspect-ratio: 1;
       border-radius: 50%;
       color: #fff;
-      background: var(--feature-border);
+      background: var(--symbol-bg, var(--feature-border));
       box-shadow: inset 0 -3px 0 rgba(81, 37, 102, .14), 0 9px 18px rgba(82, 42, 112, .16);
       font-size: 26px;
       line-height: 1;
