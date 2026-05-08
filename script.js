@@ -145,16 +145,26 @@
 
       function normalizeFeatureButtons() {
         featureButtons.forEach((button) => {
-          const meta = featureMeta[button.dataset.modal];
-          if (!meta) return;
-          button.dataset.label = meta.label;
-          button.dataset.symbol = meta.symbol;
-          button.setAttribute("aria-label", meta.label);
+          const modal = button.getAttribute("data-modal");
+          const meta = featureMeta[modal] || {};
+          const existingSymbol = button.querySelector(".button-symbol");
+          const existingLabel = button.querySelector(".feature-label");
+          const label = button.getAttribute("data-label") || existingLabel?.textContent?.trim() || meta.label || button.getAttribute("aria-label") || "";
+          const symbolText = button.getAttribute("data-symbol") || existingSymbol?.textContent?.trim() || meta.symbol || "";
+
+          button.dataset.label = label;
+          button.dataset.symbol = symbolText;
+          button.setAttribute("aria-label", label);
 
           const symbol = document.createElement("span");
+          const labelText = document.createElement("span");
           symbol.className = "button-symbol";
-          symbol.textContent = meta.symbol;
-          button.replaceChildren(symbol);
+          symbol.setAttribute("aria-hidden", "true");
+          symbol.textContent = symbolText;
+          labelText.className = "feature-label";
+          labelText.setAttribute("aria-hidden", "true");
+          labelText.textContent = label;
+          button.replaceChildren(symbol, labelText);
         });
       }
 

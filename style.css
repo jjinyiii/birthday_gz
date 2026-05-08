@@ -640,7 +640,10 @@
     }
 
     .feature-button::after {
-      content: attr(data-label);
+      content: none;
+    }
+
+    .feature-label {
       position: absolute;
       left: 50%;
       top: calc(100% + 10px);
@@ -698,7 +701,7 @@
       --float-delay: -1.25s;
     }
 
-    .feature-button[data-modal="flags"]::after {
+    .feature-button[data-modal="flags"] .feature-label {
       min-width: 132px;
       max-width: 156px;
       white-space: normal;
@@ -715,7 +718,7 @@
       --float-delay: -2.35s;
     }
 
-    .feature-button[data-modal="study"]::after {
+    .feature-button[data-modal="study"] .feature-label {
       min-width: 72px;
       white-space: nowrap;
     }
@@ -747,9 +750,9 @@
       transform: translateX(var(--button-x, 0px)) translateY(2px) scale(.98);
     }
 
-    .feature-button:hover::after,
-    .feature-button:focus-visible::after,
-    .feature-button:active::after {
+    .feature-button:hover .feature-label,
+    .feature-button:focus-visible .feature-label,
+    .feature-button:active .feature-label {
       opacity: 1;
       transform: translate(-50%, 2px) scale(1.04);
     }
@@ -2209,7 +2212,7 @@
         justify-self: center;
       }
 
-      .feature-button::after {
+      .feature-label {
         top: calc(100% + 7px);
         min-width: 0;
         max-width: 112px;
@@ -2219,19 +2222,19 @@
         overflow-wrap: anywhere;
       }
 
-      .feature-button[data-modal="flags"]::after {
+      .feature-button[data-modal="flags"] .feature-label {
         width: min(128px, 34vw);
         min-width: 0;
         max-width: 128px;
       }
 
-      .feature-button[data-modal="progress"]::after {
+      .feature-button[data-modal="progress"] .feature-label {
         width: min(112px, 30vw);
       }
 
-      .feature-button[data-modal="study"]::after,
-      .feature-button[data-modal="surprise"]::after,
-      .feature-button[data-modal="moments"]::after {
+      .feature-button[data-modal="study"] .feature-label,
+      .feature-button[data-modal="surprise"] .feature-label,
+      .feature-button[data-modal="moments"] .feature-label {
         width: max-content;
         max-width: 96px;
       }
