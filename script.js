@@ -62,9 +62,9 @@
         { src: "flag_b.webp", fallback: "flag_b.jpg", caption: "flag 02" }
       ];
       const studyPhotos = [
-        { src: "study_1.webp", fallback: "study_1.jpg", caption: "学霸笔记 01" },
-        { src: "study_2.webp", fallback: "study_2.jpg", caption: "学霸笔记 02" },
-        { src: "study_3.webp", fallback: "study_3.jpg", caption: "学霸笔记 03" }
+        { src: "study_1.webp", fallback: "study_1.jpg", caption: "有答案不想抄的来了" },
+        { src: "study_2.webp", fallback: "study_2.jpg", caption: "人工智能导论天才" },
+        { src: "study_3.webp", fallback: "study_3.jpg", caption: "python天才少女死在摇篮里了" }
       ];
       const fortunes = [
         {
