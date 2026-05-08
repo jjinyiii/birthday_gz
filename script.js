@@ -367,6 +367,7 @@
         window.setTimeout(() => {
           window.requestAnimationFrame(() => {
             opening.classList.add("is-hidden");
+            document.body.classList.remove("opening-lock");
             window.requestAnimationFrame(() => {
               party.classList.add("is-visible");
               window.scrollTo(0, 0);
