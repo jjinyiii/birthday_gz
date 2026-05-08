@@ -415,10 +415,21 @@
       transform: rotate(var(--rot));
     }
 
+    .card-stage {
+      position: relative;
+      z-index: 4;
+      width: min(92vw, 440px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      isolation: isolate;
+      overflow: visible;
+    }
+
     .birthday-card {
       position: relative;
       z-index: 2;
-      width: min(92vw, 440px);
+      width: 100%;
       min-height: auto;
       display: flex;
       flex-direction: column;
@@ -453,11 +464,15 @@
 
     .feature-dock {
       position: relative;
-      z-index: 6;
-      width: min(92vw, 440px);
-      min-height: 190px;
-      margin-top: 14px;
-      display: block;
+      z-index: 7;
+      width: 100%;
+      min-height: 206px;
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: repeat(2, 94px);
+      gap: 18px 8px;
+      place-items: start center;
       overflow: visible;
     }
 
@@ -583,7 +598,7 @@
     }
 
     .feature-button {
-      position: absolute;
+      position: relative;
       width: var(--button-size, 72px);
       height: var(--button-size, 72px);
       min-height: var(--button-size, 72px);
@@ -654,8 +669,6 @@
       --button-size: 72px;
       --float-time: 3.35s;
       --float-delay: -.2s;
-      left: 0;
-      top: 4px;
     }
 
     .feature-button[data-modal="progress"] {
@@ -665,10 +678,6 @@
       --button-size: 72px;
       --float-time: 3.65s;
       --float-delay: -.9s;
-      right: 50%;
-      top: 92px;
-      --button-x: 50%;
-      transform: translateX(var(--button-x));
     }
 
     .feature-button[data-modal="surprise"] {
@@ -678,8 +687,6 @@
       --glow: rgba(185, 149, 255, .24);
       --float-time: 3.1s;
       --float-delay: -1.7s;
-      right: 0;
-      top: 92px;
     }
 
     .feature-button[data-modal="flags"] {
@@ -689,10 +696,6 @@
       --button-size: 72px;
       --float-time: 3.55s;
       --float-delay: -1.25s;
-      left: 50%;
-      top: 4px;
-      --button-x: -50%;
-      transform: translateX(var(--button-x));
     }
 
     .feature-button[data-modal="flags"]::after {
@@ -710,8 +713,6 @@
       --button-size: 72px;
       --float-time: 3.8s;
       --float-delay: -2.35s;
-      right: 0;
-      top: 4px;
     }
 
     .feature-button[data-modal="study"]::after {
@@ -772,19 +773,25 @@
     }
 
     @media (min-width: 769px) {
+      .card-stage {
+        width: min(92vw, 440px);
+      }
+
       .feature-dock {
         position: absolute;
-        left: 50%;
-        top: calc(max(22px, env(safe-area-inset-top)) + 7vh);
-        width: min(92vw, 440px);
-        height: 620px;
-        min-height: 620px;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
         margin-top: 0;
-        transform: translateX(-50%);
+        display: block;
+        transform: none;
         pointer-events: none;
+        z-index: 7;
       }
 
       .feature-button {
+        position: absolute;
         pointer-events: auto;
       }
 
@@ -1676,12 +1683,12 @@
       0%,
       100% {
         opacity: .55;
-        transform: translateY(0);
+        transform: translateX(-50%) translateY(0);
       }
 
       50% {
         opacity: 1;
-        transform: translateY(-2px);
+        transform: translateX(-50%) translateY(-2px);
       }
     }
 
@@ -2117,7 +2124,7 @@
       .party {
         min-height: 100vh;
         min-height: 100dvh;
-        padding: calc(max(18px, env(safe-area-inset-top)) + 4vh) 14px calc(max(72px, env(safe-area-inset-bottom)) + 12vh);
+        padding: calc(max(18px, env(safe-area-inset-top)) + 3.5vh) 14px calc(max(56px, env(safe-area-inset-bottom)) + 7vh);
         overflow-x: hidden;
       }
 
@@ -2126,96 +2133,111 @@
         min-height: 100dvh;
       }
 
+      .card-stage {
+        width: min(92vw, 430px);
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-rows: 104px auto 96px;
+        row-gap: 12px;
+        align-items: start;
+        justify-items: center;
+      }
+
+      .birthday-card {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        z-index: 2;
+      }
+
       .feature-dock {
         position: relative;
         left: auto;
         right: auto;
         top: auto;
         bottom: auto;
-        width: min(92vw, 430px);
-        min-height: 188px;
+        width: auto;
+        min-height: 0;
         height: auto;
-        margin: 16px auto 0;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(74px, 1fr));
-        grid-template-rows: repeat(2, 86px);
-        gap: 20px 10px;
-        place-items: start center;
+        margin: 0;
+        display: contents;
         transform: none;
         overflow: visible;
+        z-index: 7;
       }
 
       .feature-button {
         position: relative;
-        top: auto;
-        right: auto;
-        left: auto;
-        bottom: auto;
         --button-size: 62px;
+        inset: auto;
         width: var(--button-size);
         height: var(--button-size);
         min-height: var(--button-size);
         --button-x: 0px;
-        transform: none;
+        transform: translateX(0);
         z-index: 2;
       }
 
       .feature-button[data-modal="moments"] {
-        grid-column: 1;
+        grid-column: 1 / span 2;
         grid-row: 1;
-        left: auto;
-        top: auto;
+        justify-self: center;
       }
 
       .feature-button[data-modal="flags"] {
-        grid-column: 2;
+        grid-column: 3 / span 2;
         grid-row: 1;
-        left: auto;
-        top: auto;
-        transform: none;
+        justify-self: center;
       }
 
       .feature-button[data-modal="progress"] {
-        left: auto;
-        right: auto;
-        top: auto;
-        grid-column: 3;
+        grid-column: 5 / span 2;
         grid-row: 1;
-        transform: none;
+        justify-self: center;
       }
 
       .feature-button[data-modal="study"] {
-        left: auto;
-        right: auto;
-        top: auto;
-        grid-column: 1 / span 2;
-        grid-row: 2;
+        grid-column: 2 / span 2;
+        grid-row: 3;
         justify-self: center;
       }
 
       .feature-button[data-modal="surprise"] {
         --button-size: 66px;
-        left: auto;
-        right: auto;
-        top: auto;
-        grid-column: 2 / span 2;
-        grid-row: 2;
+        grid-column: 4 / span 2;
+        grid-row: 3;
         justify-self: center;
       }
 
       .feature-button::after {
         top: calc(100% + 7px);
+        min-width: 0;
         max-width: 112px;
         font-size: 12px;
         line-height: 1.15;
+        white-space: normal;
+        overflow-wrap: anywhere;
       }
 
       .feature-button[data-modal="flags"]::after {
-        min-width: 118px;
-        max-width: 132px;
+        width: min(128px, 34vw);
+        min-width: 0;
+        max-width: 128px;
+      }
+
+      .feature-button[data-modal="progress"]::after {
+        width: min(112px, 30vw);
+      }
+
+      .feature-button[data-modal="study"]::after,
+      .feature-button[data-modal="surprise"]::after,
+      .feature-button[data-modal="moments"]::after {
+        width: max-content;
+        max-width: 96px;
       }
 
       .button-symbol {
+        width: calc(var(--button-size, 62px) - 16px);
         font-size: 24px;
       }
 

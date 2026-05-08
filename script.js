@@ -151,13 +151,10 @@
           button.dataset.symbol = meta.symbol;
           button.setAttribute("aria-label", meta.label);
 
-          let symbol = button.querySelector(".button-symbol");
-          if (!symbol) {
-            symbol = document.createElement("span");
-            symbol.className = "button-symbol";
-            button.replaceChildren(symbol);
-          }
+          const symbol = document.createElement("span");
+          symbol.className = "button-symbol";
           symbol.textContent = meta.symbol;
+          button.replaceChildren(symbol);
         });
       }
 
