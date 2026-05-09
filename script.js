@@ -140,10 +140,15 @@
       let typeTimer = 0;
       let fortuneIndex = -1;
       let tickingParallax = false;
+      let isRendered = window.__featureButtonsRendered === true;
 
       title.textContent = `${princessName}小公主，生日快乐！`;
 
       function normalizeFeatureButtons() {
+        if (isRendered) return;
+        isRendered = true;
+        window.__featureButtonsRendered = true;
+
         featureButtons.forEach((button) => {
           const modal = button.getAttribute("data-modal");
           const meta = featureMeta[modal] || {};
@@ -851,6 +856,8 @@
         window.requestAnimationFrame(updateParallax);
       }
 
+      const canUseScrollParallax = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
       ["pointerdown", "touchstart", "keydown"].forEach((eventName) => {
         window.addEventListener(eventName, unlockBgm, { once: true, passive: eventName !== "keydown" });
       });
@@ -899,7 +906,9 @@
         handleAmbientParallax(event);
       }, { passive: true });
       window.addEventListener("pointerleave", () => updateTilt(0, 0), { passive: true });
-      window.addEventListener("scroll", requestParallax, { passive: true });
+      if (canUseScrollParallax) {
+        window.addEventListener("scroll", requestParallax, { passive: true });
+      }
       window.setInterval(spawnFloatingEmoji, 2600);
-      updateParallax();
+      if (canUseScrollParallax) updateParallax();
     })();
