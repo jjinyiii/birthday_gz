@@ -33,6 +33,7 @@
       const birthdayVideo = document.getElementById("birthdayVideo");
       const bgm = document.getElementById("bgm");
       const parallaxItems = document.querySelectorAll(".dot, .wave");
+      const timeCounters = document.querySelectorAll(".time-monument");
       const managedVideos = new Set();
       const bgmBlockers = new Set();
       const SURPRISE_MODAL_BLOCKER = "surprise-modal";
@@ -174,6 +175,47 @@
       }
 
       normalizeFeatureButtons();
+
+      function calculateDays(startDate) {
+        const [year, month, day] = startDate.split("-").map(Number);
+        const start = new Date(year, month - 1, day);
+        const today = new Date();
+        const startMidnight = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+        const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        const msPerDay = 24 * 60 * 60 * 1000;
+
+        return Math.max(0, Math.floor((todayMidnight - startMidnight) / msPerDay) + 1);
+      }
+
+      function animateCountUp(element, target) {
+        const duration = Math.min(1800, Math.max(900, target * 1.6));
+        const startTime = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          element.textContent = Math.round(target * eased).toLocaleString("en-US");
+
+          if (progress < 1) {
+            window.requestAnimationFrame(tick);
+          }
+        }
+
+        window.requestAnimationFrame(tick);
+      }
+
+      function renderTimeCountersOnce() {
+        timeCounters.forEach((counter) => {
+          if (counter.dataset.rendered === "true") return;
+          const number = counter.querySelector("[data-count-target]");
+          if (!number) return;
+
+          counter.dataset.rendered = "true";
+          animateCountUp(number, calculateDays(counter.dataset.startDate));
+        });
+      }
+
+      renderTimeCountersOnce();
 
       function createMediaCoordinator(audio) {
         let unlocked = false;
