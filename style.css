@@ -479,22 +479,23 @@
     }
 
     .time-monument-container {
-      position: relative;
+      position: absolute;
+      inset: calc(max(18px, env(safe-area-inset-top)) + 2.5vh) clamp(18px, 3vw, 42px) auto;
       z-index: 1;
-      width: min(94vw, 980px);
-      margin: clamp(30px, 5vw, 58px) auto 0;
+      width: auto;
+      margin: 0;
       display: flex;
       flex-direction: row;
-      gap: clamp(18px, 4vw, 44px);
-      align-items: flex-end;
-      justify-content: center;
+      gap: 0;
+      align-items: flex-start;
+      justify-content: space-between;
       pointer-events: none;
       isolation: isolate;
     }
 
     .time-monument {
       position: relative;
-      flex: 1 1 0;
+      flex: 0 1 min(38vw, 430px);
       min-width: 0;
       max-width: 460px;
       margin-bottom: 20px;
@@ -508,8 +509,14 @@
     }
 
     .time-monument-offset {
-      margin-top: clamp(34px, 8vw, 88px);
+      flex-basis: min(34vw, 390px);
+      margin-top: 0;
+      text-align: right;
       animation-delay: 140ms;
+    }
+
+    .time-monument-offset .time-counter-line {
+      justify-content: flex-end;
     }
 
     .time-counter-label,
@@ -522,7 +529,7 @@
     }
 
     .time-counter-label {
-      margin-top: clamp(7px, 1vw, 11px);
+      margin-top: clamp(14px, 1.7vw, 24px);
       font-size: 1rem;
     }
 
@@ -542,7 +549,7 @@
       background: linear-gradient(115deg, #ff55b7 0%, #b779ff 38%, #ffcf5a 76%, #fff084 100%);
       -webkit-background-clip: text;
       background-clip: text;
-      font-size: clamp(4rem, 10vw, 9.4rem);
+      font-size: clamp(4rem, 8.5vw, 8.2rem);
       font-weight: 900;
       letter-spacing: 0;
       text-shadow: 0 8px 22px rgba(255, 88, 178, .24), 0 2px 0 rgba(255, 255, 255, .42);
@@ -558,8 +565,13 @@
 
     .time-counter-note {
       max-width: 28em;
-      margin-top: clamp(8px, 1.4vw, 14px);
+      margin-top: clamp(10px, 1.5vw, 18px);
       font-size: clamp(13px, 1.35vw, 16px);
+    }
+
+    .time-monument-offset .time-counter-note {
+      max-width: 24em;
+      margin-left: auto;
     }
 
     .time-monument:hover .time-counter-number {
@@ -905,20 +917,30 @@
       }
 
       .feature-button[data-modal="progress"] {
-        right: -104px;
-        top: 88px;
+        right: -116px;
+        top: 172px;
         --button-x: 0px;
         transform: none;
       }
 
       .feature-button[data-modal="study"] {
-        right: -92px;
-        top: 230px;
+        right: -116px;
+        top: 292px;
       }
 
       .feature-button[data-modal="surprise"] {
-        right: -118px;
-        top: 382px;
+        right: -116px;
+        top: 414px;
+      }
+
+      .feature-button[data-modal="progress"] .feature-label,
+      .feature-button[data-modal="study"] .feature-label,
+      .feature-button[data-modal="surprise"] .feature-label {
+        min-width: 86px;
+        max-width: 118px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.16;
       }
     }
 
@@ -2265,23 +2287,24 @@
       }
 
       .time-monument-container {
-        position: relative;
-        width: min(92vw, 430px);
-        margin-top: 40px;
+        position: absolute;
+        inset: calc(max(12px, env(safe-area-inset-top)) + 1vh) 12px auto;
+        width: auto;
+        margin: 0;
         display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: stretch;
-        justify-content: flex-start;
+        flex-direction: row;
+        gap: 8px;
+        align-items: flex-start;
+        justify-content: space-between;
         z-index: 1;
       }
 
       .time-monument {
-        flex: 0 0 auto;
-        max-width: 100%;
+        flex: 0 1 calc(50% - 8px);
+        max-width: calc(50% - 8px);
         margin-bottom: 20px;
         padding: 0;
-        opacity: .74;
+        opacity: .5;
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
@@ -2297,24 +2320,24 @@
       }
 
       .time-counter-number {
-        font-size: clamp(2.5rem, 10vw, 5rem);
+        font-size: clamp(2.15rem, 8.8vw, 3.8rem);
         text-shadow: 0 5px 16px rgba(255, 88, 178, .2), 0 1px 0 rgba(255, 255, 255, .5);
       }
 
       .time-counter-label {
-        margin-top: 6px;
-        font-size: 1rem;
+        margin-top: 4px;
+        font-size: clamp(10px, 2.7vw, 12px);
         color: rgba(91, 42, 113, .64);
       }
 
       .time-counter-unit {
-        font-size: clamp(.8rem, 3.4vw, 1rem);
+        font-size: clamp(.58rem, 2.2vw, .78rem);
       }
 
       .time-counter-note {
-        max-width: min(86vw, 310px);
+        max-width: 100%;
         margin-top: 5px;
-        font-size: clamp(12px, 3.25vw, 14px);
+        font-size: clamp(9px, 2.45vw, 11px);
       }
 
       .time-monument:hover .time-counter-number {
