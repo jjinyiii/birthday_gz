@@ -2287,24 +2287,27 @@
       }
 
       .time-monument-container {
-        position: absolute;
-        inset: calc(max(12px, env(safe-area-inset-top)) + 1vh) 12px auto;
-        width: auto;
-        margin: 0;
+        position: relative;
+        inset: auto;
+        width: min(92vw, 430px);
+        margin: 34px auto 0;
         display: flex;
-        flex-direction: row;
-        gap: 8px;
-        align-items: flex-start;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        justify-content: flex-start;
         z-index: 1;
+        pointer-events: none;
       }
 
       .time-monument {
-        flex: 0 1 calc(50% - 8px);
-        max-width: calc(50% - 8px);
-        margin-bottom: 20px;
+        flex: 0 0 auto;
+        width: min(100%, 360px);
+        max-width: 100%;
+        margin-bottom: 15px;
         padding: 0;
-        opacity: .5;
+        opacity: .82;
+        text-align: center;
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
@@ -2312,32 +2315,44 @@
 
       .time-monument-offset {
         margin-top: 0;
-        text-align: right;
+        text-align: center;
       }
 
       .time-counter-line {
+        justify-content: center;
         gap: 7px;
       }
 
+      .time-monument-offset .time-counter-line {
+        justify-content: center;
+      }
+
       .time-counter-number {
-        font-size: clamp(2.15rem, 8.8vw, 3.8rem);
+        font-size: clamp(2rem, 8vw, 3rem);
         text-shadow: 0 5px 16px rgba(255, 88, 178, .2), 0 1px 0 rgba(255, 255, 255, .5);
       }
 
       .time-counter-label {
-        margin-top: 4px;
-        font-size: clamp(10px, 2.7vw, 12px);
-        color: rgba(91, 42, 113, .64);
+        margin-top: 8px;
+        margin-bottom: 6px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, .82);
+        text-align: center;
       }
 
       .time-counter-unit {
-        font-size: clamp(.58rem, 2.2vw, .78rem);
+        font-size: clamp(.72rem, 2.8vw, .9rem);
       }
 
       .time-counter-note {
         max-width: 100%;
-        margin-top: 5px;
-        font-size: clamp(9px, 2.45vw, 11px);
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, .8);
+        text-align: center;
       }
 
       .time-monument:hover .time-counter-number {
