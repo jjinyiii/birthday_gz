@@ -790,7 +790,7 @@
         range.max = "100";
         range.value = "50";
         range.setAttribute("aria-label", "拖动查看进化前后对比");
-        note.textContent = "是谁偷偷进化我不说。";
+        note.textContent = "是谁偷偷进化我不说。(中间那玩意儿可以左右划)";
 
         const applySplit = (value) => {
           const clamped = Math.max(0, Math.min(100, Number(value)));
